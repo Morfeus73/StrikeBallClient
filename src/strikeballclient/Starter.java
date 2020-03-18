@@ -5,7 +5,9 @@
  */
 package strikeballclient;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  *
@@ -20,10 +22,15 @@ public class Starter {
      */
     public static void main(String[] args) throws IOException {
         StrikeBallClient client = new StrikeBallClient();
+        BufferedReader tastiera = new BufferedReader(new InputStreamReader(System.in)); 
         
-        while(client.getConnessione().isConnected()){
-            System.out.println(client.getLettore().readLine());
+        Lettore lettore=new Lettore(client);
+        lettore.start();
+        
+        while(client.isConnesso()){
+            client.getScrittore().println(tastiera.readLine());
         }
+        System.out.println("Connessione Chiusa!");
     }
     
 }
