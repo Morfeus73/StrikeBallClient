@@ -27,7 +27,7 @@ public class Starter {
         Lettore lettore=new Lettore(client);
         lettore.start();
         
-        while(client.isConnesso()){
+        while(lettore.isAlive()){
             client.getScrittore().println(tastiera.readLine());
         }
         System.out.println("Connessione Chiusa!");

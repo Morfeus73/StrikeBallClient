@@ -26,12 +26,15 @@ public class Lettore extends Thread{
     
     @Override
     public void run() {
-        while(client.isConnesso()){
-            try {
-                System.out.println(lettore.readLine());
-            } catch (IOException ex) {
-                Logger.getLogger(Lettore.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            String messaggio=lettore.readLine();
+            while(messaggio!=null){
+                System.out.println(messaggio);
+                messaggio=lettore.readLine();
             }
+            client.getScrittore().println("XXXX");
+        } catch (IOException ex) {
+            Logger.getLogger(Lettore.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
